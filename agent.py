@@ -78,7 +78,15 @@ class Agent:
           random_sample = self.memory
       
       
+      # states, actions, rewards, next_states, dones = zip(*random_sample)
+      # self.trainer.train_step(states, actions, rewards, next_states, dones)
       states, actions, rewards, next_states, dones = zip(*random_sample)
+      states = list(states)  # Convert to list
+      actions = list(actions)  # Convert to list
+      rewards = list(rewards)  # Convert to list
+      next_states = list(next_states)  # Convert to list
+      dones = list(dones)  # Convert to list
+
       self.trainer.train_step(states, actions, rewards, next_states, dones)
   
   def train_short(self, state, action, reward, next_state, done):
@@ -137,6 +145,7 @@ def train():
       total_score += score
       mean_scores.append(total_score/agent.no_games)
       plot(scores, mean_scores)
+
 
   
 if __name__=="__main__":
